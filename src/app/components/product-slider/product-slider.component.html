@@ -1,0 +1,24 @@
+<div class="py-5">
+  <div class="flex w-full justify-between items-center">
+    <h1 class="font-semibold text-2xl">{{ title }}</h1>
+
+    <a [routerLink]="path">
+      <span class="text-sm text-sky-600 underline">See all {{ title }}</span>
+    </a>
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <ng-container *ngFor="let item of products">
+      <app-product-card
+        [name]="item.name"
+        [picture]="item.picture"
+        [discount]="item.discount"
+        [available]="item.available"
+        [originalPrice]="item.originalPrice"
+        [discountPrice]="item.discountPrice"
+        [reviewsCount]="item.reviewsCount"
+        [reviewAverage]="item.reviewAverage"
+      >
+      </app-product-card>
+    </ng-container>
+  </div>
+</div>

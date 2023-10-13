@@ -1,0 +1,31 @@
+<div
+  class="hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col items-center overflow-hidden w-60"
+>
+  <div class="px-6 w-full flex flex-col">
+    <ng-container
+      *ngIf="available; then availableProduct; else unavailableProduct"
+    ></ng-container>
+
+    <img [src]="picture" [alt]="name" />
+
+    <div class="flex gap-2">
+        <app-star-rating [reviewAverage]="reviewAverage"></app-star-rating> <span>Reviews ({{ reviewsCount }})</span>
+    </div>
+
+    <!-- Component for available products -->
+    <ng-template #availableProduct>
+      <div class="flex gap-1">
+        <img src="../../../assets/available.svg" alt="Unavailable" />
+        <span class="text-xs text-green-700">in stock</span>
+      </div>
+    </ng-template>
+
+    <!-- Component for unavailable products -->
+    <ng-template #unavailableProduct>
+      <div class="flex gap-1">
+        <img src="../../../assets/unavailable.svg" alt="Unavailable" />
+        <span class="text-xs text-red-600">check availability</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

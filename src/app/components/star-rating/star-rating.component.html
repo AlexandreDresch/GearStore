@@ -1,0 +1,7 @@
+<div class="flex text-lg">
+  <i class="text-yellow-500" *ngFor="let star of stars">
+    <ng-container *ngIf="star === 1"><img src="../../../assets/filledStar.svg" alt="Filled Star" /></ng-container>
+    <ng-container *ngIf="star === 0.5"><img src="../../../assets/halfStar.svg" alt="Half Star" /></ng-container>
+    <ng-container *ngIf="star === 0"><img src="../../../assets/emptyStar.svg" alt="Empty Star" /></ng-container>
+  </i>
+</div>
