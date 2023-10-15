@@ -1,20 +1,33 @@
 <div
-  class="hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col items-center overflow-hidden w-60"
+  class="w-60 h-80 hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col items-center overflow-hidden mx-6 my-1"
 >
-  <div class="px-6 w-full flex flex-col">
+  <div class="px-6 w-full h-full flex flex-col">
     <ng-container
       *ngIf="available; then availableProduct; else unavailableProduct"
     ></ng-container>
 
-    <img [src]="picture" [alt]="name" />
+    <div class="flex justify-center">
+      <img [src]="picture" [alt]="name" class="w-36 h-36 object-contain" />
+    </div>
+    <div class="flex flex-col justify-between w-full h-full">
+      <div>
+        <div class="flex gap-2 items-center">
+          <app-star-rating [reviewAverage]="reviewAverage"></app-star-rating>
+          <span class="text-slate-500 text-xs"
+            >Reviews ({{ reviewsCount }})</span
+          >
+        </div>
 
-    <div class="flex gap-2">
-        <app-star-rating [reviewAverage]="reviewAverage"></app-star-rating> <span>Reviews ({{ reviewsCount }})</span>
+        <h3 class="line-clamp-2">{{ name }}</h3>
+      </div>
+      <ng-container
+        *ngIf="discountPrice; then showDiscount; else showOriginalPrice"
+      ></ng-container>
     </div>
 
     <!-- Component for available products -->
     <ng-template #availableProduct>
-      <div class="flex gap-1">
+      <div class="flex gap-1 mb-1">
         <img src="../../../assets/available.svg" alt="Unavailable" />
         <span class="text-xs text-green-700">in stock</span>
       </div>
@@ -22,10 +35,27 @@
 
     <!-- Component for unavailable products -->
     <ng-template #unavailableProduct>
-      <div class="flex gap-1">
+      <div class="flex gap-1 mb-1">
         <img src="../../../assets/unavailable.svg" alt="Unavailable" />
         <span class="text-xs text-red-600">check availability</span>
       </div>
+    </ng-template>
+
+    <!-- Component for products with discount-->
+    <ng-template #showDiscount>
+      <div class="flex flex-col">
+        <span class="text-sm text-slate-600 line-through"
+          >${{ originalPrice.toFixed(2) }}</span
+        >
+        <span class="text-lg font-semibold"
+          >${{ discountPrice?.toFixed(2) }}</span
+        >
+      </div>
+    </ng-template>
+
+    <!-- Component for products without discount-->
+    <ng-template #showOriginalPrice>
+      <span class="text-lg font-semibold">${{ originalPrice.toFixed(2) }}</span>
     </ng-template>
   </div>
 </div>
